@@ -1,0 +1,53 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.3.RELEASE'
+    }
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    }
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+
+group = 'devchampions'
+version = System.env.TRAVIS_BUILD_NUMBER ?: 'UNSPECIFIED';
+
+sourceCompatibility = 1.8
+
+dependencies {
+    compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: "${springBootVersion}") {
+        exclude module: "spring-boot-starter-tomcat"
+    }
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-jetty', version: "${springBootVersion}"
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: "${springBootVersion}"
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: "${springBootVersion}"
+    compile group: 'commons-validator', name: 'commons-validator', version: '1.6'
+    compile group: 'com.google.guava', name: 'guava', version: '21.0'
+    compile group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: '2.5.0'
+
+
+    compile group: 'io.github.openfeign', name: 'feign-slf4j', version: '9.5.0'
+    compile group: 'io.github.openfeign', name: 'feign-core', version: '9.5.0'
+    compile group: 'io.github.openfeign.form', name: 'feign-form', version: '2.1.0'
+
+
+    testCompile group: 'com.h2database', name: 'h2', version: '1.4.195'
+    testCompile group: 'org.codehaus.groovy', name: 'groovy', version: '2.4.11'
+    testCompile group: 'org.spockframework', name: 'spock-core', version: '1.1-groovy-2.4'
+    testCompile group: 'org.spockframework', name: 'spock-spring', version: '1.1-groovy-2.4'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: "${springBootVersion}"
+}
+
+
