@@ -1,7 +1,7 @@
 package com.devchampions.app.event.addnew;
 
 import com.devchampions.infrastructure.Reaction;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.devchampions.infrastructure.indexing.Indexer;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -9,8 +9,13 @@ import java.util.Arrays;
 @Component
 class AddNewEventReaction implements Reaction<AddNewEvent, AddNewEvent.R> {
 
-    @Autowired
-    EventRepository eventRepository;
+    private final EventRepository repository;
+    private final Indexer indices;
+
+    public AddNewEventReaction(EventRepository repository, Indexer indices) {
+        this.repository = repository;
+        this.indices = indices;
+    }
 
     @Override
     public AddNewEvent.R react(AddNewEvent $) {
@@ -20,7 +25,8 @@ class AddNewEventReaction implements Reaction<AddNewEvent, AddNewEvent.R> {
         $.endsOn.ifPresent(event::endOn);
 
         Arrays.stream($.tags).forEach(event::tag);
-        eventRepository.save(event);
+        repository.save(event);
+        indices.append(event.index());
 
         return new AddNewEvent.R(event.id());
     }

@@ -1,10 +1,14 @@
 package com.devchampions.app.event.addnew;
 
+import com.devchampions.infrastructure.indexing.Indexer;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.UUID;
+
+import static org.apache.commons.lang3.text.WordUtils.capitalizeFully;
 
 @Entity
 class Event {
@@ -79,5 +83,38 @@ class Event {
 
     public UUID id() {
         return id;
+    }
+
+
+    public Indexer.Index<Indexed> index() {
+        Indexed indexed = new Indexed();
+        indexed.name = name;
+        indexed.city = capitalizeFully(city.name());
+        indexed.country = capitalizeFully(city.country().name());
+        indexed.administrative = city.administrative().map(Administrative::name).orElse("");
+        indexed.month = capitalizeFully(startsOn.getMonth().name());
+        indexed.year = Integer.toString(startsOn.getYear());
+        indexed.tags = tags;
+        indexed.rank = 0;
+        indexed.rating = 0;
+
+        Indexer.Index.Simple<Indexed> index = new Indexer.Index.Simple<>("events", indexed);
+        index.rankBy("rank", "rating");
+        index.relevanceBy("name", "city", "administrative", "country", "tags");
+        return index;
+    }
+
+    static class Indexed {
+        public String name;
+        public String city;
+        public String country;
+        public String administrative;
+        public Collection<String> tags;
+        public String month;
+        public String year;
+
+        public double rank;
+        public double rating;
+
     }
 }

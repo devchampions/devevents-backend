@@ -38,6 +38,7 @@ dependencies {
     compile group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: '2.5.0'
     compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.8.8'
     compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: '2.8.8'
+    compile group: 'com.algolia', name: 'algoliasearch', version: '2.9.0'
 
 
     compile group: 'io.github.openfeign', name: 'feign-slf4j', version: '9.5.0'

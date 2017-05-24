@@ -21,7 +21,7 @@ class DevData implements CommandLineRunner {
     void push() {
         def body = """
         {
-            "name": "DevTernity 2016",
+            "name": "DevTernity 2017",
             "description": "DevTernity is the the greatest international software development conference in Latvia. Carefully chosen keynotes and workshops, exclusively delivered by the world's top speakers make the conference inspiring and practical.",
             "website": "https://devternity.com",
             "country": "Latvia",

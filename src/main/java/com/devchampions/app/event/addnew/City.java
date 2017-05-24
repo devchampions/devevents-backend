@@ -3,6 +3,7 @@ package com.devchampions.app.event.addnew;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.util.Optional;
 
 @Embeddable
 public class City {
@@ -22,6 +23,7 @@ public class City {
         if (country == null) {
             throw new IllegalArgumentException("Country is missing");
         }
+        this.name = name;
         this.country = country;
     }
 
@@ -34,4 +36,18 @@ public class City {
         }
         this.administrative = administrative;
     }
+
+    public Optional<Administrative> administrative() {
+        return Optional.ofNullable(administrative);
+    }
+
+    public String name() {
+        return name;
+    }
+
+    public Country country() {
+        return country;
+    }
 }
+
+

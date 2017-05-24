@@ -16,4 +16,8 @@ public class Administrative {
 
     private Administrative() {
     }
+
+    public String name() {
+        return name;
+    }
 }

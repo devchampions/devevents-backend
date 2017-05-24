@@ -20,4 +20,8 @@ public class Country {
     public City city(String name) {
         return new City(name, this);
     }
+
+    public String name() {
+        return name;
+    }
 }
