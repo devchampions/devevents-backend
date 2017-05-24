@@ -3,7 +3,6 @@
 By default, the backend api listens for port `8080`.
 
 #### Before running the backend
-###### Algolia account 
 1. Apply for [Algolia](https://www.algolia.com) account and get your `applicationId` and `apiKey`
 2. Create `applicaiton.yml` file (see example below) under `src/test/resources` and replace placeholders with the actual values:
 ```
