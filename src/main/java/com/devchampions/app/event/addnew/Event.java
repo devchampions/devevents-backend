@@ -88,6 +88,7 @@ class Event {
 
     public Indexer.Index<Indexed> index() {
         Indexed indexed = new Indexed();
+        indexed.entityId = id.toString();
         indexed.name = name;
         indexed.city = capitalizeFully(city.name());
         indexed.country = capitalizeFully(city.country().name());
@@ -105,6 +106,7 @@ class Event {
     }
 
     static class Indexed {
+        public String entityId;
         public String name;
         public String city;
         public String country;
