@@ -1,6 +1,7 @@
 package com.devchampions.app.event.addnew;
 
-import com.devchampions.infrastructure.indexing.Indexer;
+import com.devchampions.infrastructure.indexing.Index;
+import com.devchampions.infrastructure.indexing.IndexedWithSuppliedId;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -86,7 +87,7 @@ class Event {
     }
 
 
-    public Indexer.Index<Indexed> index() {
+    public Index<Indexed> index() {
         Indexed indexed = new Indexed();
         indexed.entityId = id.toString();
         indexed.name = name;
@@ -99,13 +100,13 @@ class Event {
         indexed.rank = 0;
         indexed.rating = 0;
 
-        Indexer.Index.Simple<Indexed> index = new Indexer.Index.Simple<>("events", indexed);
-        index.rankBy("rank", "rating");
+        Index.Simple<Indexed> index = new Index.Simple<>("events", indexed);
+        index.rankBy("desc(rank)", "desc(rating)");
         index.relevanceBy("name", "city", "administrative", "country", "tags");
         return index;
     }
 
-    static class Indexed {
+    static class Indexed implements IndexedWithSuppliedId {
         public String entityId;
         public String name;
         public String city;
@@ -118,5 +119,9 @@ class Event {
         public double rank;
         public double rating;
 
+        @Override
+        public String id() {
+            return entityId;
+        }
     }
 }
