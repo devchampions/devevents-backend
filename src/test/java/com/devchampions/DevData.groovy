@@ -55,15 +55,16 @@ class DevData implements CommandLineRunner {
         (1..50).each {
             def randomWord = randomizer.next()
             def randomCity = random(cities)
-            def body = """
+            def randomMonth = random(["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"])
+            def body = """      
             {
             "name": "$randomWord 2017",
             "about": "$randomWord is the the greatest international software development conference in Latvia. Carefully chosen keynotes and workshops, exclusively delivered by the world's top speakers make the conference inspiring and practical.",
             "website": "https://devternity.com",
             "country": "$randomCity.country",
             "city": "$randomCity.name",
-            "startsOn": "2017-12-01",
-            "endsOn": "2017-12-${random(["01", "02"])}",
+            "startsOn": "2017-$randomMonth-01",
+            "endsOn": "2017-$randomMonth-${random(["01", "02"])}",
             "tags": ["software", "software architecture", "devops", "java", "leadership"]
             }
             """
