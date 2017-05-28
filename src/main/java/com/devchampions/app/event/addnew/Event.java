@@ -18,7 +18,7 @@ class Event {
     private UUID id = UUID.randomUUID();
 
     private String name;
-    private String description;
+    private String about;
     private String website;
 
     private LocalDate startsOn;
@@ -37,6 +37,7 @@ class Event {
         rename(name);
         place(city);
         startOn(startsOn);
+        endOnTheSameDay();
     }
 
     private Event() {
@@ -57,11 +58,18 @@ class Event {
     }
 
     public void endOn(LocalDate endsOn) {
+        if (endsOn == null) {
+            throw new IllegalArgumentException("Ending date is missing");
+        }
         this.endsOn = endsOn;
     }
 
-    public void describe(String description) {
-        this.description = description;
+    public void endOnTheSameDay() {
+        this.endsOn = startsOn;
+    }
+
+    public void describe(String about) {
+        this.about = about;
     }
 
     public void rename(String name) {
@@ -96,19 +104,27 @@ class Event {
         indexed.administrative = city.administrative().map(Administrative::name).orElse("");
         indexed.month = capitalizeFully(startsOn.getMonth().name());
         indexed.year = Integer.toString(startsOn.getYear());
+        indexed.startsOnDay = startsOn.getDayOfMonth();
+
+        if (!startsOn.isEqual(endsOn)) {
+            indexed.endsOnDay = endsOn.getDayOfMonth();
+        }
+
         indexed.tags = tags;
+        indexed.about = about;
         indexed.rank = 0;
         indexed.rating = 0;
 
         Index.Simple<Indexed> index = new Index.Simple<>("events", indexed);
         index.rankBy("desc(rank)", "desc(rating)");
-        index.relevanceBy("name", "city", "administrative", "country", "tags");
+        index.relevanceBy("name", "city", "administrative", "country", "month", "year", "tags", "about");
         return index;
     }
 
     static class Indexed implements IndexedWithSuppliedId {
         public String entityId;
         public String name;
+        public String about;
         public String city;
         public String country;
         public String administrative;
@@ -118,6 +134,8 @@ class Event {
 
         public double rank;
         public double rating;
+        public Integer startsOnDay;
+        public Integer endsOnDay;
 
         @Override
         public String id() {

@@ -18,7 +18,7 @@ public class AddNewEvent implements Command<AddNewEvent.R> {
     public String country;
     public Optional<String> administrative = Optional.empty();
 
-    public Optional<String> description = Optional.empty();
+    public Optional<String> about = Optional.empty();
     public Optional<String> website = Optional.empty();
     //
 //    public String seriesId;

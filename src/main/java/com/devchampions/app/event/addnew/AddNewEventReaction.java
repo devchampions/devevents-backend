@@ -20,7 +20,7 @@ class AddNewEventReaction implements Reaction<AddNewEvent, AddNewEvent.R> {
     @Override
     public AddNewEvent.R react(AddNewEvent $) {
         Event event = new Event($.name, city($), $.startsOn);
-        $.description.ifPresent(event::describe);
+        $.about.ifPresent(event::describe);
         $.website.ifPresent(event::hyperlink);
         $.endsOn.ifPresent(event::endOn);
 
