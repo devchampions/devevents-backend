@@ -105,6 +105,7 @@ class Event {
         indexed.month = capitalizeFully(startsOn.getMonth().name());
         indexed.year = Integer.toString(startsOn.getYear());
         indexed.startsOnDay = startsOn.getDayOfMonth();
+        indexed.endsOnEpoch = endsOn.toEpochDay();
 
         if (!startsOn.isEqual(endsOn)) {
             indexed.endsOnDay = endsOn.getDayOfMonth();
@@ -136,6 +137,7 @@ class Event {
         public double rating;
         public Integer startsOnDay;
         public Integer endsOnDay;
+        public Long endsOnEpoch;
 
         @Override
         public String id() {
