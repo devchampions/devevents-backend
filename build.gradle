@@ -1,3 +1,4 @@
+
 buildscript {
     ext {
         springBootVersion = '1.5.3.RELEASE'
@@ -18,6 +19,8 @@ repositories {
 }
 
 apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'project-report'
 apply plugin: 'org.springframework.boot'
 
 group = 'devchampions'
@@ -26,6 +29,7 @@ version = System.env.TRAVIS_BUILD_NUMBER ?: 'UNSPECIFIED';
 sourceCompatibility = 1.8
 
 dependencies {
+
     compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: "${springBootVersion}") {
         exclude module: "spring-boot-starter-tomcat"
     }
@@ -40,11 +44,9 @@ dependencies {
     compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: '2.8.8'
     compile group: 'com.algolia', name: 'algoliasearch', version: '2.9.0'
 
-
     compile group: 'io.github.openfeign', name: 'feign-slf4j', version: '9.5.0'
     compile group: 'io.github.openfeign', name: 'feign-core', version: '9.5.0'
     compile group: 'io.github.openfeign.form', name: 'feign-form', version: '2.1.0'
-
 
     testCompile group: 'org.kohsuke', name: 'wordnet-random-name', version: '1.3'
     testCompile group: 'com.h2database', name: 'h2', version: '1.4.195'
@@ -52,6 +54,5 @@ dependencies {
     testCompile group: 'org.spockframework', name: 'spock-core', version: '1.1-groovy-2.4'
     testCompile group: 'org.spockframework', name: 'spock-spring', version: '1.1-groovy-2.4'
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: "${springBootVersion}"
+
 }
-
-
