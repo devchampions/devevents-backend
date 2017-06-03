@@ -21,7 +21,7 @@ class DevData implements CommandLineRunner {
 
     void push() {
 
-        def cities = [
+        def places = [
                 [
                         name   : "Vilnius",
                         country: "Lithuania"
@@ -44,27 +44,29 @@ class DevData implements CommandLineRunner {
                 ],
         ]
 
-        def random = { Collection arr ->
+        def pickRandom = { Collection arr ->
             def index = new Random().nextInt(arr.size())
             arr[index]
         }
 
-        def randomizer = new RandomNameGenerator()
+        def generateRandomName = {
+            new RandomNameGenerator().next()
+        }
 
 
         (1..50).each {
-            def randomWord = randomizer.next()
-            def randomCity = random(cities)
-            def randomMonth = random(["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"])
+            def randomName = generateRandomName()
+            def randomPlace = pickRandom(places)
+            def randomMonth = pickRandom(["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"])
             def body = """      
             {
-            "name": "$randomWord 2017",
-            "about": "$randomWord is the the greatest international software development conference in Latvia. Carefully chosen keynotes and workshops, exclusively delivered by the world's top speakers make the conference inspiring and practical.",
+            "name": "$randomName 2017",
+            "about": "$randomName is the the greatest international software development conference in $randomPlace.country. Carefully chosen keynotes and workshops, exclusively delivered by the world's top speakers make the conference inspiring and practical.",
             "website": "https://devternity.com",
-            "country": "$randomCity.country",
-            "city": "$randomCity.name",
+            "country": "$randomPlace.country",
+            "city": "$randomPlace.name",
             "startsOn": "2017-$randomMonth-01",
-            "endsOn": "2017-$randomMonth-${random(["01", "02"])}",
+            "endsOn": "2017-$randomMonth-${pickRandom(["01", "02"])}",
             "tags": ["software", "software architecture", "devops", "java", "leadership"]
             }
             """
