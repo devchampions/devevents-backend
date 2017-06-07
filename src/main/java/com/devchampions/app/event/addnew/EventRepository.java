@@ -7,7 +7,7 @@ import java.util.Optional;
 @Repository
 public interface EventRepository extends org.springframework.data.repository.Repository<Event, String> {
 
-    Optional<Event> findOne(String id);
+    Optional<Event> findByUuid(String id);
 
     void save(Event event);
 

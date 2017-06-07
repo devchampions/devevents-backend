@@ -15,7 +15,10 @@ import static org.apache.commons.lang3.text.WordUtils.capitalizeFully;
 public class Event {
 
     @Id
-    private String id = UUID.randomUUID().toString();
+    @GeneratedValue
+    private Long id;
+
+    private String uuid = UUID.randomUUID().toString();
 
     private String name;
     private String about;
@@ -90,14 +93,15 @@ public class Event {
         this.website = website;
     }
 
-    public String id() {
-        return id;
+    public String uuid() {
+        return uuid;
     }
 
 
+    
     public Index<Indexed> index() {
         Indexed indexed = new Indexed();
-        indexed.entityId = id.toString();
+        indexed.entityId = uuid;
         indexed.name = name;
         indexed.city = capitalizeFully(city.name());
         indexed.country = capitalizeFully(city.country().name());

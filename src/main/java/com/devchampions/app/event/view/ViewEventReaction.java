@@ -15,12 +15,12 @@ public class ViewEventReaction implements Reaction<ViewEvent, ViewEvent.Event> {
 
     @Override
     public ViewEvent.Event react(ViewEvent $) {
-        return eventRepository.findOne($.id())
+        return eventRepository.findByUuid($.id())
                 .map(e -> {
                     ViewEvent.Event event = new ViewEvent.Event();
                     event.name = e.name();
                     return event;
                 })
-                .orElseThrow(() -> new IllegalArgumentException("Cannot find event by id " + $.id()));
+                .orElseThrow(() -> new IllegalArgumentException("Cannot find event by unique id " + $.id()));
     }
 }

@@ -28,7 +28,7 @@ class AddNewEventReaction implements Reaction<AddNewEvent, AddNewEvent.EventId> 
         repository.save(event);
         indices.append(event.index());
 
-        return new AddNewEvent.EventId(event.id());
+        return new AddNewEvent.EventId(event.uuid());
     }
 
     private City city(AddNewEvent $) {
