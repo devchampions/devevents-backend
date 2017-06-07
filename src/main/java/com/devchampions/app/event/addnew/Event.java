@@ -2,6 +2,7 @@ package com.devchampions.app.event.addnew;
 
 import com.devchampions.infrastructure.indexing.Index;
 import com.devchampions.infrastructure.indexing.IndexedWithSuppliedId;
+import com.google.common.collect.ImmutableList;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -26,8 +27,6 @@ public class Event {
 
     private LocalDate startsOn;
     private LocalDate endsOn;
-
-    private String address;
 
     @ElementCollection
     private Collection<String> tags = new LinkedList<>();
@@ -58,6 +57,10 @@ public class Event {
             throw new IllegalArgumentException("Starting date is missing");
         }
         this.startsOn = startsOn;
+    }
+
+    public LocalDate startsOn() {
+        return startsOn;
     }
 
     public void endOn(LocalDate endsOn) {
@@ -128,6 +131,22 @@ public class Event {
 
     public String name() {
         return name;
+    }
+
+    public String about() {
+        return about;
+    }
+
+    public String website() {
+        return website;
+    }
+
+    public Collection<String> tags() {
+        return ImmutableList.copyOf(tags);
+    }
+
+    public LocalDate endsOn() {
+        return endsOn;
     }
 
     static class Indexed implements IndexedWithSuppliedId {

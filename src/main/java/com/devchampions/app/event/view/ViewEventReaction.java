@@ -19,6 +19,11 @@ public class ViewEventReaction implements Reaction<ViewEvent, ViewEvent.Event> {
                 .map(e -> {
                     ViewEvent.Event event = new ViewEvent.Event();
                     event.name = e.name();
+                    event.about = e.about();
+                    event.startsOnEpoch = e.startsOn().toEpochDay();
+                    event.endsOnEpoch = e.endsOn().toEpochDay();
+                    event.website = e.website();
+                    event.tags = e.tags();
                     return event;
                 })
                 .orElseThrow(() -> new IllegalArgumentException("Cannot find event by unique id " + $.id()));
