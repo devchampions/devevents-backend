@@ -4,9 +4,8 @@ import com.devchampions.infrastructure.Command;
 
 import java.time.LocalDate;
 import java.util.Optional;
-import java.util.UUID;
 
-public class AddNewEvent implements Command<AddNewEvent.R> {
+public class AddNewEvent implements Command<AddNewEvent.EventId> {
 
 //    public enum Iam {
 //        Tracking, Attending, Organising, Speaking
@@ -32,16 +31,17 @@ public class AddNewEvent implements Command<AddNewEvent.R> {
 //
 //    public Iam iam;
 
-    static class R implements Command.R {
+    static class EventId implements Command.R {
 
-        private final UUID eventId;
+        private final String id;
 
-        public R(UUID eventId) {
-            this.eventId = eventId;
+        public EventId(String id) {
+            this.id = id;
         }
 
-        public UUID eventId() {
-            return eventId;
+        @Override
+        public String toString() {
+            return id;
         }
     }
 

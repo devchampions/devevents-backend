@@ -1,4 +1,4 @@
-package com.devchampions.infrastructure;
+package com.devchampions.infrastructure.web;
 
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;

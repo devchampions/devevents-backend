@@ -12,10 +12,10 @@ import java.util.UUID;
 import static org.apache.commons.lang3.text.WordUtils.capitalizeFully;
 
 @Entity
-class Event {
+public class Event {
 
     @Id
-    private UUID id = UUID.randomUUID();
+    private String id = UUID.randomUUID().toString();
 
     private String name;
     private String about;
@@ -90,7 +90,7 @@ class Event {
         this.website = website;
     }
 
-    public UUID id() {
+    public String id() {
         return id;
     }
 
@@ -120,6 +120,10 @@ class Event {
         index.rankBy("desc(rank)", "desc(rating)");
         index.relevanceBy("name", "city", "administrative", "country", "month", "year", "tags", "about");
         return index;
+    }
+
+    public String name() {
+        return name;
     }
 
     static class Indexed implements IndexedWithSuppliedId {

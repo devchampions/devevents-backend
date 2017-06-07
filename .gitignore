@@ -3,4 +3,6 @@
 .DS_Store
 .gradle
 build
+out
+*.iml
 /src/test/resources/application.yml

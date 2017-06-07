@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
 @Component
-class AddNewEventReaction implements Reaction<AddNewEvent, AddNewEvent.R> {
+class AddNewEventReaction implements Reaction<AddNewEvent, AddNewEvent.EventId> {
 
     private final EventRepository repository;
     private final Indexer indices;
@@ -18,7 +18,7 @@ class AddNewEventReaction implements Reaction<AddNewEvent, AddNewEvent.R> {
     }
 
     @Override
-    public AddNewEvent.R react(AddNewEvent $) {
+    public AddNewEvent.EventId react(AddNewEvent $) {
         Event event = new Event($.name, city($), $.startsOn);
         $.about.ifPresent(event::describe);
         $.website.ifPresent(event::hyperlink);
@@ -28,7 +28,7 @@ class AddNewEventReaction implements Reaction<AddNewEvent, AddNewEvent.R> {
         repository.save(event);
         indices.append(event.index());
 
-        return new AddNewEvent.R(event.id());
+        return new AddNewEvent.EventId(event.id());
     }
 
     private City city(AddNewEvent $) {
