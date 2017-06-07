@@ -21,6 +21,16 @@ class Algolia implements Indexer {
     }
 
     @Override
+    public void cleanIndices(String name) {
+        com.algolia.search.Index<?> algoliaIndex = client.initIndex(name);
+        try {
+            algoliaIndex.clear();
+        } catch (AlgoliaException e) {
+            throw new IndexCleanupFailed(e);
+        }
+    }
+
+    @Override
     public <T extends IndexedWithSuppliedId> void append(Index<T> index) {
         com.algolia.search.Index<T> algoliaIndex = client.initIndex(index.name(), index.type());
         try {

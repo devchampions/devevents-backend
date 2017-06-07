@@ -1,6 +1,8 @@
 package com.devchampions
 
+import com.devchampions.infrastructure.indexing.Indexer
 import org.kohsuke.randname.RandomNameGenerator
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
@@ -12,11 +14,19 @@ import static org.springframework.http.MediaType.APPLICATION_JSON
 @Component
 class DevData implements CommandLineRunner {
 
+    @Autowired
+    Indexer indexer
+
     def rest = new RestTemplate()
 
     @Override
     void run(String... args) throws Exception {
+        cleanIndices();
         push()
+    }
+
+    def cleanIndices() {
+        indexer.cleanIndices "events"
     }
 
     void push() {
