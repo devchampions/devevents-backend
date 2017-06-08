@@ -2,12 +2,14 @@ package com.devchampions.app.event.addnew;
 
 import com.devchampions.infrastructure.indexing.Index;
 import com.devchampions.infrastructure.indexing.IndexedWithSuppliedId;
-import com.google.common.collect.ImmutableList;
+import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.LinkedList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.UUID;
 
 import static org.apache.commons.lang3.text.WordUtils.capitalizeFully;
@@ -27,9 +29,7 @@ public class Event {
 
     private LocalDate startsOn;
     private LocalDate endsOn;
-
-    @ElementCollection
-    private Collection<String> tags = new LinkedList<>();
+    private String tags;
 
     @AttributeOverride(name = "name", column = @Column(name = "CITY_NAME"))
     @Embedded
@@ -49,7 +49,10 @@ public class Event {
         if (tag == null || tag.isEmpty()) {
             throw new IllegalArgumentException("Tag is missing");
         }
-        this.tags.add(tag);
+
+        Collection<String> uniqueTags = new HashSet<>(tags());
+        uniqueTags.add(tag);
+        this.tags = Joiner.on(',').join(uniqueTags);
     }
 
     public void startOn(LocalDate startsOn) {
@@ -101,7 +104,6 @@ public class Event {
     }
 
 
-    
     public Index<Indexed> index() {
         Indexed indexed = new Indexed();
         indexed.entityId = uuid;
@@ -118,7 +120,7 @@ public class Event {
             indexed.endsOnDay = endsOn.getDayOfMonth();
         }
 
-        indexed.tags = tags;
+        indexed.tags = tags();
         indexed.about = about;
         indexed.rank = 0;
         indexed.rating = 0;
@@ -142,7 +144,11 @@ public class Event {
     }
 
     public Collection<String> tags() {
-        return ImmutableList.copyOf(tags);
+        if (tags == null) {
+            return Collections.emptyList();
+        } else {
+            return Splitter.on(',').trimResults().splitToList(tags);
+        }
     }
 
     public LocalDate endsOn() {
