@@ -10,13 +10,12 @@ cache:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
 script: "./gradlew build"
+env:
+  global:
+    - secure: "AjIEc+kEr3ZicMvfK7irsEYH1FUjgR3/PjIKvky60HuhIsmDLrCBzacqIQAPfatNQjA/f7xO0YI8y/MK5fSn5nwWMll3PEWT/QuIK9mZVleTPjwYfcmb0bEPjzyXNG8vPspV18JmYDUxlPIxLXwHXyIdnUx5kI036TwkiXPeQiSFYGmgmA4bWppJFs4Ru1re+A+80bOatzany4TqeTVxy6H0BhOo6r6hlp3QoY7g6gB+pt4AFvmiD+00DO2JdHwKObS8rldag9Qsnc7Ov1BJAPd6rVhmEhSHgtRZ6kGWvsI11oj7uuis/XwUMnjm/OTtyz7tnL6Ert1ARRnibJCCKcsE943sDdgeHTZJ7+pJq6mCgj012cllIBw4hKUVXLB+Tqft9A0S4DLcXu5Ec4Xx2Dj4y2qs/xGz25PV1+FkSKgNlGWhEkudhRLIvek9DfnfN4wo+OqL/OkTBkhs7Knn4fTnCFqSFMOzxOfuPwDOCj/AEmpAOmv+8A3h53jlQrgr9NY1UclIteWgEPFArY+X1nDUGf2a6w7eLU/IENBGl9ETkyQi2ZR+HCZdj4IV+k6CNJRVg2TNJWd75jcaD7nZ+l1c1C/J5O0fE0TbS5jDWgU74SN36CLfqDrVL/tbnSpUT79UjsLJzL3nYJZSQVXF43f2hXn+FwqCz8Nt+PlJN6E="
 deploy:
 - provider: s3
   skip_cleanup: true
-  access_key_id: AKIAJJ7RQZEDMHNWXLAA
-  secret_access_key:
-    secure: OxgFz1bAOJ5bfG5lDu3vN5thkGJZdejSL2ttchC7tpaAcX2rvKNM4v8fwZ1crcRd0rbfc/CgUvrugysyMWzZpZ4wdAocbfNAzfGo2UdO6MbIvvf2b7d0l+RzirCBNG2WoOtLIMBHc+mly5E0JJ4pb6XbL9NWae1SmPzlIZphJCWFtn4AMZx3lXbgUVRCnfpSqSPiFX7GY4g1qbT7R14nd51VfIHTNnflY9PywQ/arAIvsX7xXSVK952STyvUOl+XfyDiqE+HSEXkhCbhPcheOKgpbCMq7NT8TsVo2JBi8h+dKiGszOa2yV5sqKNDhLT/zoVhHKaqpklAep2XrJRFRkt81YOCKaalcwwThvj2gfYmIofGg6LLqHhUEMJEyGZ5LD9ivphP4Y6BqGgYZeSipdFLRgP3Y4CHmHhm7/vgJKysQUK/CSePMi2dUiJBek25G5jkcCLMV7zywQz86ZLV9jMSRqLJQUeMU0COWigBY0h/DvOCxuA12/n/4PxntQNG1N+sZEj1Pz1RRa0ZcWXrEjca4U26VRm8iE8D0KTDrXMhUSFYQPRJfdnMowt5sk61L0raaRz2DCUjpw4v7LpZKZ0hZPXiXpmAO1fm/oR8Rln2W+XOaU+OcegKwOKko8InuDKUAk1gOTM3IbXgBzhlbmG+9ZaZjr3v7JDcge7xETs=
-  bucket: dev-events-code
   local_dir: build/libs
   acl: private
   on:
