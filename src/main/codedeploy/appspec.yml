@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: devevents-backend.jar
-    destination: /webapps/devevents-backend.jar
+    destination: /webapps/
 hooks:
   AfterInstall:
     - location: install_service.sh
