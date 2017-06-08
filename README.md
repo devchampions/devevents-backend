@@ -21,6 +21,9 @@ algolia:
 auth0:
   issuer: <issuer>
   apiAudience: <audience>
+  scope: <scope>
+  domain: <domain>
+  clientId: <clientId>  
 ```
 
 

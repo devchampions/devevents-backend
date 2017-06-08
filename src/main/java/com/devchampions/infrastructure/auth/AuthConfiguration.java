@@ -1,4 +1,4 @@
-package com.devchampions;
+package com.devchampions.infrastructure.auth;
 
 import com.auth0.spring.security.api.JwtWebSecurityConfigurer;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity(debug = true)
-public class AppConfig extends WebSecurityConfigurerAdapter {
+public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 
     @Value(value = "${auth0.apiAudience}")
     private String apiAudience;
