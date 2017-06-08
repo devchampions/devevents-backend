@@ -3,3 +3,11 @@ os: linux
 files:
   - source: devevents-backend.jar
     destination: /webapps/devevents-backend.jar
+hooks:
+  AfterInstall:
+    - location: install_service.sh
+      timeout: 180
+  ApplicationStart:
+    - location: start_service.sh
+      timeout: 3600
+      
