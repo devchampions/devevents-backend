@@ -17,6 +17,7 @@ deploy:
 - provider: s3
   skip_cleanup: true
   local_dir: build/libs
+  bucket: dev-events-code
   acl: private
   on:
     repo: devchampions/devevents-backend
