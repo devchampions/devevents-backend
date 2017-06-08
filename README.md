@@ -1,3 +1,6 @@
+
+[![Build Status](https://travis-ci.org/devchampions/devevents-backend.svg?branch=master)](https://travis-ci.org/devchampions/devevents-backend)
+
 # How to run the backend?
 
 By default, the backend api listens for port `8080`.
