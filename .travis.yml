@@ -9,14 +9,14 @@ cache:
 - directories:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
-script: "./gradlew build"
+script: "./gradlew distZip"
 env:
   global:
     - secure: "AjIEc+kEr3ZicMvfK7irsEYH1FUjgR3/PjIKvky60HuhIsmDLrCBzacqIQAPfatNQjA/f7xO0YI8y/MK5fSn5nwWMll3PEWT/QuIK9mZVleTPjwYfcmb0bEPjzyXNG8vPspV18JmYDUxlPIxLXwHXyIdnUx5kI036TwkiXPeQiSFYGmgmA4bWppJFs4Ru1re+A+80bOatzany4TqeTVxy6H0BhOo6r6hlp3QoY7g6gB+pt4AFvmiD+00DO2JdHwKObS8rldag9Qsnc7Ov1BJAPd6rVhmEhSHgtRZ6kGWvsI11oj7uuis/XwUMnjm/OTtyz7tnL6Ert1ARRnibJCCKcsE943sDdgeHTZJ7+pJq6mCgj012cllIBw4hKUVXLB+Tqft9A0S4DLcXu5Ec4Xx2Dj4y2qs/xGz25PV1+FkSKgNlGWhEkudhRLIvek9DfnfN4wo+OqL/OkTBkhs7Knn4fTnCFqSFMOzxOfuPwDOCj/AEmpAOmv+8A3h53jlQrgr9NY1UclIteWgEPFArY+X1nDUGf2a6w7eLU/IENBGl9ETkyQi2ZR+HCZdj4IV+k6CNJRVg2TNJWd75jcaD7nZ+l1c1C/J5O0fE0TbS5jDWgU74SN36CLfqDrVL/tbnSpUT79UjsLJzL3nYJZSQVXF43f2hXn+FwqCz8Nt+PlJN6E="
 deploy:
 - provider: s3
   skip_cleanup: true
-  local_dir: build/libs
+  local_dir: build/distributions
   bucket: dev-events-code
   upload_dir: backend-builds
   acl: private
@@ -25,7 +25,7 @@ deploy:
     branch: master
 - provider: codedeploy
   bucket: dev-events-code
-  key: backend-builds/devevents-backend.jar
+  key: backend-builds/devevents-backend.zip
   application: dev_events_backend
   deployment_group: dev_events_deployment_group
 notifications:

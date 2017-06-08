@@ -62,3 +62,7 @@ dependencies {
     testCompile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: "${springBootVersion}"
 
 }
+
+task distZip(type: Zip, dependsOn: [build]) {
+  from "${buildDir}/libs"
+}
