@@ -26,6 +26,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/events").permitAll()
                 .antMatchers(HttpMethod.GET, "/events").permitAll()
+                .antMatchers(HttpMethod.GET, "/info").permitAll()
                 .antMatchers(HttpMethod.GET, "/events/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/photos/**").hasAuthority("read:photos")
                 .antMatchers(HttpMethod.POST, "/photos/**").hasAuthority("create:photos")

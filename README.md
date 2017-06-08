@@ -17,6 +17,7 @@ spring:
 algolia:
   appId: <yourAppId>
   apiKey: <yourApiKey>
+  webApiKey: <webApiKey>
 auth0:
   issuer: <issuer>
   apiAudience: <audience>
