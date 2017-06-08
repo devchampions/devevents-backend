@@ -65,4 +65,5 @@ dependencies {
 
 task distZip(type: Zip, dependsOn: [build]) {
   from "${buildDir}/libs"
+  from "${projectDir}/src/main/codedeploy"
 }
