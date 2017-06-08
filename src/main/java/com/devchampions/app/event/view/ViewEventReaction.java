@@ -20,8 +20,9 @@ public class ViewEventReaction implements Reaction<ViewEvent, ViewEvent.Event> {
                     ViewEvent.Event event = new ViewEvent.Event();
                     event.name = e.name();
                     event.about = e.about();
-                    event.startsOnEpoch = e.startsOn().toEpochDay();
-                    event.endsOnEpoch = e.endsOn().toEpochDay();
+                    event.startsOn = e.startsOn().toString();
+                    event.endsOn = e.endsOn().toString();
+                    event.location = e.city().name() + ", " + e.city().country().name();
                     event.website = e.website();
                     event.tags = e.tags();
                     return event;

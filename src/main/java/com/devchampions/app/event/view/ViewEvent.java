@@ -20,8 +20,9 @@ public class ViewEvent implements Command<ViewEvent.Event> {
         public String name;
         public String about;
         public String website;
-        public long startsOnEpoch;
-        public long endsOnEpoch;
+        public String startsOn;
+        public String endsOn;
+        public String location;
         public Collection<String> tags;
     }
 

@@ -149,6 +149,10 @@ public class Event {
         return endsOn;
     }
 
+    public City city() {
+        return city;
+    }
+
     static class Indexed implements IndexedWithSuppliedId {
         public String entityId;
         public String name;
