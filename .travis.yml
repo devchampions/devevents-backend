@@ -1,25 +1,27 @@
 language: java
 dist: trusty
 jdk:
-  - openjdk8
+- openjdk8
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
-  - directories:
-    - "$HOME/.gradle/caches/"
-    - "$HOME/.gradle/wrapper/"
+- directories:
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
 script: "./gradlew build"
 deploy:
-  - provider: s3
-    skip_cleanup: true
-    access_key_id: AKIAJJ7RQZEDMHNWXLAA
-    secret_access_key:
-      secure: OxgFz1bAOJ5bfG5lDu3vN5thkGJZdejSL2ttchC7tpaAcX2rvKNM4v8fwZ1crcRd0rbfc/CgUvrugysyMWzZpZ4wdAocbfNAzfGo2UdO6MbIvvf2b7d0l+RzirCBNG2WoOtLIMBHc+mly5E0JJ4pb6XbL9NWae1SmPzlIZphJCWFtn4AMZx3lXbgUVRCnfpSqSPiFX7GY4g1qbT7R14nd51VfIHTNnflY9PywQ/arAIvsX7xXSVK952STyvUOl+XfyDiqE+HSEXkhCbhPcheOKgpbCMq7NT8TsVo2JBi8h+dKiGszOa2yV5sqKNDhLT/zoVhHKaqpklAep2XrJRFRkt81YOCKaalcwwThvj2gfYmIofGg6LLqHhUEMJEyGZ5LD9ivphP4Y6BqGgYZeSipdFLRgP3Y4CHmHhm7/vgJKysQUK/CSePMi2dUiJBek25G5jkcCLMV7zywQz86ZLV9jMSRqLJQUeMU0COWigBY0h/DvOCxuA12/n/4PxntQNG1N+sZEj1Pz1RRa0ZcWXrEjca4U26VRm8iE8D0KTDrXMhUSFYQPRJfdnMowt5sk61L0raaRz2DCUjpw4v7LpZKZ0hZPXiXpmAO1fm/oR8Rln2W+XOaU+OcegKwOKko8InuDKUAk1gOTM3IbXgBzhlbmG+9ZaZjr3v7JDcge7xETs=
-    bucket: dev-events-code
-    local_dir: build/libs
-    acl: private
-    on:
-      repo: devchampions/devevents-backend
-      branch: master
-
+- provider: s3
+  skip_cleanup: true
+  access_key_id: AKIAJJ7RQZEDMHNWXLAA
+  secret_access_key:
+    secure: OxgFz1bAOJ5bfG5lDu3vN5thkGJZdejSL2ttchC7tpaAcX2rvKNM4v8fwZ1crcRd0rbfc/CgUvrugysyMWzZpZ4wdAocbfNAzfGo2UdO6MbIvvf2b7d0l+RzirCBNG2WoOtLIMBHc+mly5E0JJ4pb6XbL9NWae1SmPzlIZphJCWFtn4AMZx3lXbgUVRCnfpSqSPiFX7GY4g1qbT7R14nd51VfIHTNnflY9PywQ/arAIvsX7xXSVK952STyvUOl+XfyDiqE+HSEXkhCbhPcheOKgpbCMq7NT8TsVo2JBi8h+dKiGszOa2yV5sqKNDhLT/zoVhHKaqpklAep2XrJRFRkt81YOCKaalcwwThvj2gfYmIofGg6LLqHhUEMJEyGZ5LD9ivphP4Y6BqGgYZeSipdFLRgP3Y4CHmHhm7/vgJKysQUK/CSePMi2dUiJBek25G5jkcCLMV7zywQz86ZLV9jMSRqLJQUeMU0COWigBY0h/DvOCxuA12/n/4PxntQNG1N+sZEj1Pz1RRa0ZcWXrEjca4U26VRm8iE8D0KTDrXMhUSFYQPRJfdnMowt5sk61L0raaRz2DCUjpw4v7LpZKZ0hZPXiXpmAO1fm/oR8Rln2W+XOaU+OcegKwOKko8InuDKUAk1gOTM3IbXgBzhlbmG+9ZaZjr3v7JDcge7xETs=
+  bucket: dev-events-code
+  local_dir: build/libs
+  acl: private
+  on:
+    repo: devchampions/devevents-backend
+    branch: master
+notifications:
+  slack:
+    secure: fKgiQeyU2MkzN9bKO15jElcSnDIJoCEFfkjA8j6RMR4Ycarz7Qg4I2pOKrSrOw/jIim9XiNA7dea1k5eu7tbtpQXwH8CSpW+4sjmstPqNRyJykiIQtbSb00sVx7GZzeCWP456PrMEds9Yr1GhC8GNqe91Vi5J2BDuXIJ0qox7vkVsULFqBTjLogIPIOeROssqxbWjD+H7Tw2kIW3xQlD/NSB+kU/otBbAfzrDpBB0OGs2IjUjwEdjCcKoqut8+zcLRK09kw/cidqXiRHFCvSq4BDXeDz4OfCDaldP9hrpyoWWJmEzJ4WSOJ75qcit4aSFvRlSmnmzHarXq7ks3k4x24jY3FchX3VF1lhQt7+1ux5Sdd5Zhs3WHLoVJ6fd4q5v3Kj3jE/MG4ZI/fmRUPbsfW4ThNQxgCE2PoB0Sj9PCLdpEXAbcUgtp3FT/xFq3wEswqwxtQLg3O1C0bwNohrszd/cbs0PncLdyYCCuMxHFSgIJwfMTB4JOIWCrr8r9HCi1epV9OUZ2yEKs9jtFjRIShy873243Kl8Z/Isr38O9yWgHKkXWyvx+vz6IMMUrggPLrAaP40Zyf7jPgAEII1G/Cp3/H3NS5BhzfTA4C/bL/pFiX4FQz3LvbMrwTeZLLpMUzmU1z5BPpf9ItMycL/pgFZE6IQ9nbnuj8uHVOjYwQ=
