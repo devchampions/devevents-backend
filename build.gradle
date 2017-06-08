@@ -24,9 +24,13 @@ apply plugin: 'project-report'
 apply plugin: 'org.springframework.boot'
 
 group = 'devchampions'
-version = System.env.TRAVIS_BUILD_NUMBER ?: 'UNSPECIFIED';
+version = ''
 
 sourceCompatibility = 1.8
+
+springBoot {
+    executable = true
+}
 
 dependencies {
 
@@ -56,6 +60,5 @@ dependencies {
     testCompile group: 'org.spockframework', name: 'spock-spring', version: '1.1-groovy-2.4'
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: "${springBootVersion}"
     testCompile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: "${springBootVersion}"
-
 
 }

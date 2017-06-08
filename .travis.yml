@@ -7,6 +7,19 @@ before_cache:
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   - directories:
-     - $HOME/.gradle/caches/
-     - $HOME/.gradle/wrapper/
-script: ./gradlew build
+    - "$HOME/.gradle/caches/"
+    - "$HOME/.gradle/wrapper/"
+script: "./gradlew build"
+deploy:
+  - provider: s3
+    skip_cleanup: true
+    access_key_id: AKIAJJ7RQZEDMHNWXLAA
+    secret_access_key:
+      secure: OxgFz1bAOJ5bfG5lDu3vN5thkGJZdejSL2ttchC7tpaAcX2rvKNM4v8fwZ1crcRd0rbfc/CgUvrugysyMWzZpZ4wdAocbfNAzfGo2UdO6MbIvvf2b7d0l+RzirCBNG2WoOtLIMBHc+mly5E0JJ4pb6XbL9NWae1SmPzlIZphJCWFtn4AMZx3lXbgUVRCnfpSqSPiFX7GY4g1qbT7R14nd51VfIHTNnflY9PywQ/arAIvsX7xXSVK952STyvUOl+XfyDiqE+HSEXkhCbhPcheOKgpbCMq7NT8TsVo2JBi8h+dKiGszOa2yV5sqKNDhLT/zoVhHKaqpklAep2XrJRFRkt81YOCKaalcwwThvj2gfYmIofGg6LLqHhUEMJEyGZ5LD9ivphP4Y6BqGgYZeSipdFLRgP3Y4CHmHhm7/vgJKysQUK/CSePMi2dUiJBek25G5jkcCLMV7zywQz86ZLV9jMSRqLJQUeMU0COWigBY0h/DvOCxuA12/n/4PxntQNG1N+sZEj1Pz1RRa0ZcWXrEjca4U26VRm8iE8D0KTDrXMhUSFYQPRJfdnMowt5sk61L0raaRz2DCUjpw4v7LpZKZ0hZPXiXpmAO1fm/oR8Rln2W+XOaU+OcegKwOKko8InuDKUAk1gOTM3IbXgBzhlbmG+9ZaZjr3v7JDcge7xETs=
+    bucket: dev-events-code
+    local_dir: build/libs
+    acl: private
+    on:
+      repo: devchampions/devevents-backend
+      branch: master
+
