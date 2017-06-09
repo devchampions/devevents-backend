@@ -9,9 +9,9 @@ public interface Command<T extends Command.R> {
     }
 
     interface R {
-        Command.R Void = new Command.R() {
+        class Void implements R {
 
-        };
+        }
     }
 
     default T execute(Now now) {

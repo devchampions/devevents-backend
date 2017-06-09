@@ -1,6 +1,8 @@
 package com.devchampions.app.event.addnew;
 
 import com.devchampions.app.event.TwitterPresence;
+import com.devchampions.app.event.speakership.Speaker;
+import com.devchampions.app.event.speakership.Speakers;
 import com.devchampions.infrastructure.indexing.Index;
 import com.devchampions.infrastructure.indexing.IndexedWithSuppliedId;
 import com.google.common.base.Joiner;
@@ -28,6 +30,8 @@ public class Event {
     private LocalDate startsOn;
     private LocalDate endsOn;
     private String tags;
+
+    private Speakers speakers;
 
     @Embedded
     @AttributeOverrides({
@@ -100,6 +104,10 @@ public class Event {
             throw new IllegalArgumentException("City is missing");
         }
         this.city = city;
+    }
+
+    public void accept(Speaker speaker) {
+        
     }
 
     public void establish(TwitterPresence twitterPresence) {

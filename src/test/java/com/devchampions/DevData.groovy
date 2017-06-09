@@ -19,6 +19,30 @@ class DevData implements CommandLineRunner {
 
     def rest = new RestTemplate()
 
+    def places = [
+            [
+                    name   : "Vilnius",
+                    country: "Lithuania"
+            ],
+            [
+                    name   : "Riga",
+                    country: "Latvia"
+            ],
+            [
+                    name   : "Munich",
+                    country: "Germany"
+            ],
+            [
+                    name   : "Berlin",
+                    country: "Germany"
+            ],
+            [
+                    name   : "London",
+                    country: "United Kingdom"
+            ],
+    ]
+
+
     @Override
     void run(String... args) throws Exception {
         cleanIndices();
@@ -31,38 +55,9 @@ class DevData implements CommandLineRunner {
 
     void push() {
 
-        def places = [
-                [
-                        name   : "Vilnius",
-                        country: "Lithuania"
-                ],
-                [
-                        name   : "Riga",
-                        country: "Latvia"
-                ],
-                [
-                        name   : "Munich",
-                        country: "Germany"
-                ],
-                [
-                        name   : "Berlin",
-                        country: "Germany"
-                ],
-                [
-                        name   : "London",
-                        country: "United Kingdom"
-                ],
-        ]
-
-        def pickRandom = { Collection arr ->
-            def index = new Random().nextInt(arr.size())
-            arr[index]
+        (1..10).each {
+            
         }
-
-        def generateRandomName = {
-            new RandomNameGenerator().next()
-        }
-
 
         (1..50).each {
             def randomName = generateRandomName()
@@ -71,7 +66,7 @@ class DevData implements CommandLineRunner {
             def body = """      
             {
             "name": "$randomName 2017",
-            "about": "$randomName is the the greatest international software development conference in $randomPlace.country. Carefully chosen keynotes and workshops, exclusively delivered by the world's top speakers make the conference inspiring and practical.",
+            "about": "$randomName is the the greatest international software development conference in $randomPlace.country. Carefully chosen keynotes and workshops, exclusively delivered by the world's top membership make the conference inspiring and practical.",
             "website": "https://devternity.com",
             "country": "$randomPlace.country",                      
             "twitter": {
@@ -89,7 +84,16 @@ class DevData implements CommandLineRunner {
         }
     }
 
-    private jsonMedia() {
+    def pickRandom = { Collection arr ->
+        def index = new Random().nextInt(arr.size())
+        arr[index]
+    }
+
+    def generateRandomName = {
+        new RandomNameGenerator().next()
+    }
+
+    def jsonMedia() {
         def headers = new HttpHeaders()
         headers.setContentType(APPLICATION_JSON)
         headers

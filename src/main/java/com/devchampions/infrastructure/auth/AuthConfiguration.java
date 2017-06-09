@@ -9,11 +9,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 
     @Value(value = "${auth0.apiAudience}")
     private String apiAudience;
+    
     @Value(value = "${auth0.issuer}")
     private String issuer;
 
@@ -27,11 +28,9 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/events").permitAll()
                 .antMatchers(HttpMethod.GET, "/events").permitAll()
                 .antMatchers(HttpMethod.GET, "/info").permitAll()
+                .antMatchers(HttpMethod.GET, "/h2-console/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/error").permitAll()
                 .antMatchers(HttpMethod.GET, "/events/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/photos/**").hasAuthority("read:photos")
-                .antMatchers(HttpMethod.POST, "/photos/**").hasAuthority("create:photos")
-                .antMatchers(HttpMethod.PUT, "/photos/**").hasAuthority("update:photos")
-                .antMatchers(HttpMethod.DELETE, "/photos/**").hasAuthority("delete:photos")
                 .anyRequest().authenticated();
     }
 }
