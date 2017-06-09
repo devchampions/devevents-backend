@@ -10,6 +10,9 @@ By default, the backend api listens for port `8080`.
 2. Apply for [Auth0](https://auth0.com) account, create API and obtain your `issuer` and `audience`
 3. Create `application.yml` file (see example below) under `src/test/resources` and replace placeholders with the actual values:
 ```
+endpoints:
+  cors:
+    allowed-origins: "*"
 spring:
   devtools:
     livereload:
