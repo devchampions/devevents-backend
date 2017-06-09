@@ -1,5 +1,6 @@
 package com.devchampions.app.event.addnew;
 
+import com.devchampions.app.event.TwitterPresence;
 import com.devchampions.infrastructure.Reaction;
 import com.devchampions.infrastructure.indexing.Indexer;
 import org.springframework.stereotype.Component;
@@ -19,10 +20,12 @@ class AddNewEventReaction implements Reaction<AddNewEvent, AddNewEvent.EventId> 
 
     @Override
     public AddNewEvent.EventId react(AddNewEvent $) {
-        Event event = new Event($.name, city($), $.startsOn);
-        $.about.ifPresent(event::describe);
-        $.website.ifPresent(event::hyperlink);
+        Event event = new Event($.name, $.about, $.website, city($), $.startsOn);
         $.endsOn.ifPresent(event::endOn);
+
+        $.twitter
+                .map(twitter -> new TwitterPresence(twitter.handle, twitter.hashtag))
+                .ifPresent(event::establish);
 
         Arrays.stream($.tags).forEach(event::tag);
         repository.save(event);

@@ -73,7 +73,11 @@ class DevData implements CommandLineRunner {
             "name": "$randomName 2017",
             "about": "$randomName is the the greatest international software development conference in $randomPlace.country. Carefully chosen keynotes and workshops, exclusively delivered by the world's top speakers make the conference inspiring and practical.",
             "website": "https://devternity.com",
-            "country": "$randomPlace.country",
+            "country": "$randomPlace.country",                      
+            "twitter": {
+                "handle": "$randomName",
+                "hashtag": "ht$randomName"
+            },
             "city": "$randomPlace.name",
             "startsOn": "2017-$randomMonth-01",
             "endsOn": "2017-$randomMonth-${pickRandom(["01", "02"])}",

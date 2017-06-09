@@ -23,6 +23,8 @@ public class ViewEvent implements Command<ViewEvent.Event> {
         public String startsOn;
         public String endsOn;
         public String location;
+        public String twitterHandle;
+        public String twitterHashtag;
         public Collection<String> tags;
     }
 

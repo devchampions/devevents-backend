@@ -1,5 +1,6 @@
 package com.devchampions.app.event.addnew;
 
+import com.devchampions.app.event.TwitterPresence;
 import com.devchampions.infrastructure.indexing.Index;
 import com.devchampions.infrastructure.indexing.IndexedWithSuppliedId;
 import com.google.common.base.Joiner;
@@ -7,10 +8,7 @@ import com.google.common.base.Splitter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.UUID;
+import java.util.*;
 
 import static org.apache.commons.lang3.text.WordUtils.capitalizeFully;
 
@@ -31,12 +29,21 @@ public class Event {
     private LocalDate endsOn;
     private String tags;
 
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "hashtag", column = @Column(name = "TWT_HASHTAG")),
+            @AttributeOverride(name = "handle", column = @Column(name = "TWT_HANDLE"))
+    })
+    private TwitterPresence twitterPresence;
+
     @AttributeOverride(name = "name", column = @Column(name = "CITY_NAME"))
     @Embedded
     private City city;
 
-    public Event(String name, City city, LocalDate startsOn) {
+    public Event(String name, String about, String website, City city, LocalDate startsOn) {
         rename(name);
+        describe(about);
+        hyperlink(website);
         place(city);
         startOn(startsOn);
         endOnTheSameDay();
@@ -95,6 +102,13 @@ public class Event {
         this.city = city;
     }
 
+    public void establish(TwitterPresence twitterPresence) {
+        if (twitterPresence == null) {
+            throw new IllegalArgumentException("Twitter presence is missing");
+        }
+        this.twitterPresence = twitterPresence;
+    }
+
     public void hyperlink(String website) {
         this.website = website;
     }
@@ -103,6 +117,10 @@ public class Event {
         return uuid;
     }
 
+
+    public Optional<TwitterPresence> twitter() {
+        return Optional.ofNullable(twitterPresence);
+    }
 
     public Index<Indexed> index() {
         Indexed indexed = new Indexed();

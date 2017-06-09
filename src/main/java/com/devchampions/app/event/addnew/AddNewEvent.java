@@ -17,19 +17,23 @@ public class AddNewEvent implements Command<AddNewEvent.EventId> {
     public String country;
     public Optional<String> administrative = Optional.empty();
 
-    public Optional<String> about = Optional.empty();
-    public Optional<String> website = Optional.empty();
+    public String about;
+    public String website;
     //
 //    public String seriesId;
     public String[] tags = new String[]{};
     //
     public LocalDate startsOn;
     public Optional<LocalDate> endsOn = Optional.empty();
-//
-//    public String twitterHandle;
-//    public String twitterHashtag;
+    //
+    public Optional<Twitter> twitter = Optional.empty();
 //
 //    public Iam iam;
+
+    static class Twitter {
+        public String handle;
+        public String hashtag;
+    }
 
     static class EventId implements Command.R {
 
