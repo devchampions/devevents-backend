@@ -7,7 +7,7 @@ By default, the backend api listens for port `8080`.
 
 #### Before running the backend
 1. Apply for [Algolia](https://www.algolia.com) account and get your `applicationId` and `apiKey`
-2. Apply for [Auth0](https://auth0.com) account, create API and obtain your `issuer` and `audience`
+2. Apply for [Auth0](https://auth0.com) account, create a new SPA client. Obtain your `issuer`,`domain`,`client id` and `client secret`
 3. Create `application.yml` file (see example below) under `src/test/resources` and replace placeholders with the actual values:
 ```
 endpoints:
@@ -23,10 +23,10 @@ algolia:
   webApiKey: <webApiKey>
 auth0:
   issuer: <issuer>
-  apiAudience: <audience>
-  scope: <scope>
+  scope: <scope> (openid profile)
   domain: <domain>
   clientId: <clientId>  
+  clientSecret: <clientSecret>
 ```
 
 
