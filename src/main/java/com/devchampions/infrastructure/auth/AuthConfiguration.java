@@ -12,16 +12,18 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Value(value = "${auth0.apiAudience}")
-    private String apiAudience;
+    @Value(value = "${auth0.clientId}")
+    private String clientId;
     
     @Value(value = "${auth0.issuer}")
     private String issuer;
 
+    @Value(value = "${auth0.clientSecret}")
+    private String clientSecret;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         JwtWebSecurityConfigurer
-                .forRS256(apiAudience, issuer)
+                .forHS256(clientId, issuer, clientSecret.getBytes())
                 .configure(http)
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/login").permitAll()
