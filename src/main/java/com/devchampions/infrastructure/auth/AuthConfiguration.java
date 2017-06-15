@@ -33,6 +33,7 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/h2-console/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/error").permitAll()
                 .antMatchers(HttpMethod.GET, "/events/**").permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "**").permitAll()
                 .anyRequest().authenticated();
     }
 }
