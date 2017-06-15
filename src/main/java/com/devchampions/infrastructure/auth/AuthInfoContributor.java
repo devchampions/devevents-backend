@@ -12,14 +12,12 @@ class AuthInfoContributor implements InfoContributor {
     private final ImmutableMap<String, String> info;
 
     public AuthInfoContributor(
-            @Value("${auth0.apiAudience}") String apiAudience,
             @Value("${auth0.issuer}") String issuer,
             @Value("${auth0.scope}") String scope,
             @Value("${auth0.domain}") String domain,
             @Value("${auth0.clientId}") String clientId) {
 
         info = ImmutableMap.<String, String>builder()
-                .put("apiAudience", apiAudience)
                 .put("issuer", issuer)
                 .put("scope", scope)
                 .put("domain", domain)
